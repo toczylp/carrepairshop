@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class ClientDao {
 
     private static final String CREATE_QUERY = "insert into clients (name, surname, date_of_birth, mail) VALUES (?, ?, ?, ?);";
-    private static final String SEARCH_BY_ID_QUERY = "select * from clients where id = ?;";
-    private static final String SEARCH_ALL_QUERY = "select * from clients;";
+    private static final String READ_BY_ID_QUERY = "select * from clients where id = ?;";
+    private static final String READ_ALL_QUERY = "select * from clients;";
     private static final String UPDATE_QUERY = "update clients set name = ?, surname = ?, date_of_birth = ?, mail = ? where id = ?;";
     private static final String DELETE_QUERY = "delete from clients where id = ?;";
 
     //CREATE
 
-    public Client create(Client client) {
+    public static Client create(Client client) {
 
         ResultSet rS = null;
 
@@ -44,7 +44,9 @@ public class ClientDao {
             e.printStackTrace();
         } finally {
             try {
-                rS.close();
+                if (rS != null) {
+                    rS.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -61,7 +63,7 @@ public class ClientDao {
         ResultSet rS = null;
 
         try(Connection connection = DbUtil.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SEARCH_BY_ID_QUERY)) {
+        PreparedStatement statement = connection.prepareStatement(READ_BY_ID_QUERY)) {
 
             statement.setInt(1, id);
             rS = statement.executeQuery();
@@ -81,7 +83,9 @@ public class ClientDao {
             e.printStackTrace();
         } finally {
             try {
-                rS.close();
+                if (rS != null) {
+                    rS.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -89,7 +93,7 @@ public class ClientDao {
         return null;
     }
 
-    public ArrayList<Client> readAll() {
+    public static ArrayList<Client> readAll() {
 
         ResultSet rS = null;
         ArrayList<Client> clients = new ArrayList<Client>();
@@ -97,7 +101,7 @@ public class ClientDao {
         try (Connection connection = DbUtil.getConnection();
         Statement statement = connection.createStatement()) {
 
-            rS = statement.executeQuery(SEARCH_ALL_QUERY);
+            rS = statement.executeQuery(READ_ALL_QUERY);
 
             while (rS.next()) {
                 Client client = new Client();
@@ -114,7 +118,9 @@ public class ClientDao {
             e.printStackTrace();
         } finally {
             try {
-                rS.close();
+                if (rS != null) {
+                    rS.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }

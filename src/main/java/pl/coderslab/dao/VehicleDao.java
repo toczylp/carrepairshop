@@ -6,13 +6,12 @@ import pl.coderslab.utils.DeleteByIdCommon;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.function.DoubleBinaryOperator;
 
 public class VehicleDao {
 
     private static final String CREATE_QUERY = "insert into vehicle (model, brand, production_year, registration_no, next_inspection_date, client_id) VALUES (?, ?, ?, ?, ? , ?);";
-    private static final String SEARCH_BY_ID_QUERY = "select * from vehicle where id = ?;";
-    private static final String SEARCH_ALL_QUERY = "select * from vehicle;";
+    private static final String READ_BY_ID_QUERY = "select * from vehicle where id = ?;";
+    private static final String READ_ALL_QUERY = "select * from vehicle;";
     private static final String UPDATE_QUERY = "update vehicle set model = ?, brand = ?, production_year = ?, registration_no = ?, next_inspection_date = ?, client_id = ? where id = ?;";
     private static final String DELETE_QUERY = "delete from vehicle where id = ?;";
 
@@ -60,7 +59,7 @@ public class VehicleDao {
         ResultSet rS = null;
 
         try (Connection connection = DbUtil.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SEARCH_BY_ID_QUERY)) {
+        PreparedStatement statement = connection.prepareStatement(READ_BY_ID_QUERY)) {
 
             statement.setInt(1, id);
 
@@ -99,7 +98,7 @@ public class VehicleDao {
         try (Connection connection = DbUtil.getConnection();
         Statement statement = connection.createStatement()){
 
-            rS = statement.executeQuery(SEARCH_ALL_QUERY);
+            rS = statement.executeQuery(READ_ALL_QUERY);
 
             while (rS.next()) {
 

@@ -2,6 +2,7 @@ package pl.coderslab.datamodel;
 
 // Class for testing DAO
 
+import pl.coderslab.dao.EmployeeDao;
 import pl.coderslab.dao.VehicleDao;
 
 import java.sql.Timestamp;
@@ -14,10 +15,23 @@ public class Main {
 
         Timestamp nId = Timestamp.valueOf("2020-01-21 05:12:44");
 
-        //Vehicle vehicle = new Vehicle("600", "Fiat", 1995, "WU084V", nId, 1);
-        VehicleDao vehicleDao = new VehicleDao();
-        System.out.println(vehicleDao.delete(2));
+        Vehicle vehicle = new Vehicle("700", "Fiat", 2001, "GA1111", nId);
 
+        System.out.println(vehicle.getClientId());
+
+        VehicleDao vehicleDao = new VehicleDao();
+        vehicleDao.create(vehicle);
+
+/*
+        Employee employee = new Employee("Jan", "Kowaslki", "Warszawa, Potokowa 21", 554322111, "bardzo dobry pracownik", 123);
+        EmployeeDao employeeDao = new EmployeeDao();
+        employeeDao.create(employee);
+*/
+
+        //Vehicle vehicle = new Vehicle("600", "Fiat", 1995, "WU084V", nId, 1);
+       /* VehicleDao vehicleDao = new VehicleDao();
+        System.out.println(vehicleDao.delete(2));
+*/
         //vehicleDao.create(vehicle);
   //      Client client = new Client("Marek", "Marecki", dOb, "marecki@op.pl");
 

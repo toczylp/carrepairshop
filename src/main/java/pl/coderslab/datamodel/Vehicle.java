@@ -10,7 +10,7 @@ public class Vehicle {
     private int productionYear;
     private String registrationNo;
     private Timestamp nextInspectionDate;
-    private int clientId;
+    private int clientId = 0;
 
     public Vehicle() {
     }
@@ -22,6 +22,14 @@ public class Vehicle {
         this.registrationNo = registrationNo;
         this.nextInspectionDate = nextInspectionDate;
         this.clientId = clientId;
+    }
+
+    public Vehicle(String model, String brand, int productionYear, String registrationNo, Timestamp nextInspectionDate) {
+        this.model = model;
+        this.brand = brand;
+        this.productionYear = productionYear;
+        this.registrationNo = registrationNo;
+        this.nextInspectionDate = nextInspectionDate;
     }
 
     public int getVehicalId() {

@@ -3,6 +3,7 @@ package pl.coderslab.datamodel;
 // Class for testing DAO
 
 import pl.coderslab.dao.EmployeeDao;
+import pl.coderslab.dao.OrderDao;
 import pl.coderslab.dao.VehicleDao;
 
 import java.sql.Timestamp;
@@ -15,12 +16,30 @@ public class Main {
 
         Timestamp nId = Timestamp.valueOf("2020-01-21 05:12:44");
 
-        Vehicle vehicle = new Vehicle("700", "Fiat", 2001, "GA1111", nId);
+        //Order order = new Order(nId, 1, "Nie dzialaja hamulce",1);
+
+        OrderDao orderDao = new OrderDao();
+
+        Order order = orderDao.readById(1);
+
+        order.setRepairStartDate(nId);
+        order.setRepairHours(20);
+        order.setWageHourly(100);
+        order.setPartsCost(1100);
+        order.setRepairCost();
+        order.setStatus("ready to pick up");
+        order.setRepairDescription("wymiana tarcz i klockow hamulcowych");
+
+        orderDao.update(order);
+
+
+        /*
+        Vehicle vehicle = new Vehicle("700", "Fiat", 2001, "GA1111", nId, 1);
 
         System.out.println(vehicle.getClientId());
 
         VehicleDao vehicleDao = new VehicleDao();
-        vehicleDao.create(vehicle);
+        vehicleDao.create(vehicle);*/
 
 /*
         Employee employee = new Employee("Jan", "Kowaslki", "Warszawa, Potokowa 21", 554322111, "bardzo dobry pracownik", 123);

@@ -8,18 +8,62 @@ import pl.coderslab.utils.DeleteByIdCommon;
 
 public class OrderDao {
 
+    private static final String CREATE_QUERY_CAR_INBOUND = "insert into repair_order " +
+            "(repair_start_date_planned, assigned_repairman, defect_description, repair_status, " +
+            "repair_vehical) " +
+            "VALUES (?, ?, ?, ?, ?);";
+
     private static final String CREATE_QUERY = "insert into repair_order " +
             "(repair_start_date_planned, repair_start_date, assigned_repairman, defect_description, repair_description, repair_status, " +
             "repair_vehical, repair_cost, repair_parts_cost, repair_wage_hourly_cost, repair_hours) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String READ_BY_ID_QUERY = "select * from repair_order where id = ?;";
     private static final String READ_ALL_QUERY = "select * from repair_order;";
-    private static final String UPDATE_QUERY = "update repair_order set repair_start_date_planned = ?, repair_start_date = ?, assigned_repairman = ?," +
-            " defect_description = ?, repair_description = ?, repair_status = ?, repair_vehical = ?, repair_cost = ?, repair_parts_cost = ?," +
+    private static final String UPDATE_QUERY = "update repair_order set repair_start_date = ?, repair_description = ?, repair_cost = ?, repair_parts_cost = ?," +
             " repair_wage_hourly_cost = ?, repair_hours =? where id = ?;";
+    private static final String UPDATE_QUERY_ORDER_STATUS = "update repair_order set repair_status = ? where id = ?;";
     private static final String DELETE_QUERY = "delete from repair_order where id = ?;";
 
-    public static Order create(Order order) {
+
+    // CREATE : car inbound
+
+    public static Order carInbound(Order order) {
+
+        ResultSet rS = null;
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(CREATE_QUERY_CAR_INBOUND, Statement.RETURN_GENERATED_KEYS)) {
+
+            statementDataInput(order, statement);
+            statement.executeUpdate();
+
+            rS = statement.getGeneratedKeys();
+
+            while (rS.next()) {
+
+                order.setId(rS.getInt(1));
+            }
+
+            return order;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rS != null) {
+                    rS.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+    // Standard create DAO method :
+
+   /* public static Order create(Order order) {
 
         ResultSet rS = null;
 
@@ -51,20 +95,14 @@ public class OrderDao {
         }
 
         return null;
-    }
+    }*/
 
     private static void statementDataInput(Order order, PreparedStatement statement) throws SQLException {
         statement.setTimestamp(1, order.getRepairStartDatePlanned());
-        statement.setTimestamp(2, order.getRepairStartDate());
-        statement.setInt(3, order.getAssignedRepairmanId());
-        statement.setString(4, order.getDefectDescription());
-        statement.setString(5, order.getRepairDescription());
-        statement.setString(6, order.getStatus());
-        statement.setInt(7, order.getVehicalId());
-        statement.setInt(8, order.getRepairCost());
-        statement.setInt(9, order.getPartsCost());
-        statement.setInt(10, order.getWageHourly());
-        statement.setInt(11, order.getRepairHours());
+        statement.setInt(2, order.getAssignedRepairmanId());
+        statement.setString(3, order.getDefectDescription());
+        statement.setString(4, order.getStatus());
+        statement.setInt(5, order.getVehicalId());
     }
 
     //READ
@@ -157,8 +195,14 @@ public class OrderDao {
         try (Connection connection = DbUtil.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
 
-            statementDataInput(order, statement);
-            statement.setInt(12, order.getId());
+
+            statement.setTimestamp(1, order.getRepairStartDate());
+            statement.setString(2, order.getRepairDescription());
+            statement.setInt(3, order.getRepairCost());
+            statement.setInt(4, order.getPartsCost());
+            statement.setInt(5, order.getWageHourly());
+            statement.setInt(6, order.getRepairHours());
+            statement.setInt(7, order.getId());
             int answer = statement.executeUpdate();
 
             if (answer == 1) {
@@ -173,6 +217,32 @@ public class OrderDao {
 
         return false;
     }
+
+    public static boolean updateStatus(Order order) {
+
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_QUERY)) {
+
+
+            statement.setString(1, order.getStatus());
+            statement.setInt(2, order.getId());
+
+            int answer = statement.executeUpdate();
+
+            if (answer == 1) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 
     //DELETE
 

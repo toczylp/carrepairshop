@@ -2,7 +2,7 @@
 <dataSource name="MySQL - @localhost">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.15">
     <root id="1">
-      <ServerVersion>5.7.26</ServerVersion>
+      <ServerVersion>5.7.27</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <DefaultCasing>exact</DefaultCasing>
@@ -1102,6 +1102,7 @@
     <column id="270" parent="242" name="assigned_repairman">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="271" parent="242" name="defect_description">
@@ -1113,7 +1114,6 @@
     <column id="272" parent="242" name="repair_description">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="273" parent="242" name="repair_status">
@@ -1125,6 +1125,7 @@
     <column id="274" parent="242" name="repair_vehical">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="275" parent="242" name="repair_cost">

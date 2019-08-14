@@ -10,12 +10,12 @@ public class Order {
     private int assignedRepairmanId;
     private String defectDescription;
     private String repairDescription;
-    private String status;
+    private String status = "receiving";
     private int vehicalId;
-    private int repairCost;
-    private int partsCost;
-    private int wageHourly;
-    private int repairHours;
+    private int repairCost = 0;
+    private int partsCost = 0;
+    private int wageHourly = 0;
+    private int repairHours = 0;
 
     public Order() {
     }
@@ -25,6 +25,13 @@ public class Order {
         this.defectDescription = defectDescription;
         this.repairDescription = repairDescription;
         this.status = status;
+        this.vehicalId = vehicalId;
+    }
+
+    public Order(Timestamp repairStartDatePlanned, int assignedRepairmanId, String defectDescription, int vehicalId) {
+        this.repairStartDatePlanned = repairStartDatePlanned;
+        this.assignedRepairmanId = assignedRepairmanId;
+        this.defectDescription = defectDescription;
         this.vehicalId = vehicalId;
     }
 
@@ -110,6 +117,10 @@ public class Order {
 
     public int getRepairCost() {
         return repairCost;
+    }
+
+    public void setRepairCost() {
+        this.repairCost = this.wageHourly * this.repairHours + this.partsCost;
     }
 
     public void setRepairCost(int repairCost) {

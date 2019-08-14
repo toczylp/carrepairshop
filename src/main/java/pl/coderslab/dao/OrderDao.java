@@ -19,6 +19,7 @@ public class OrderDao {
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String READ_BY_ID_QUERY = "select * from repair_order where id = ?;";
     private static final String READ_ALL_QUERY = "select * from repair_order;";
+    private static final String READ_ALL_ACTIVE_QUERY = "select * from repair_order where repair_status = 'in repair';";
     private static final String UPDATE_QUERY = "update repair_order set repair_start_date = ?, repair_description = ?, repair_cost = ?, repair_parts_cost = ?," +
             " repair_wage_hourly_cost = ?, repair_hours =? where id = ?;";
     private static final String UPDATE_QUERY_ORDER_STATUS = "update repair_order set repair_status = ? where id = ?;";
@@ -151,6 +152,55 @@ public class OrderDao {
         order.setPartsCost(rS.getInt(10));
         order.setWageHourly(rS.getInt(11));
         order.setRepairHours(rS.getInt(12));
+    }
+
+    private static void orderFieldsInput(ResultSet rS, Order order) throws SQLException {
+        order.setId(rS.getInt(1));
+        order.setRepairStartDatePlanned(rS.getTimestamp(2));
+        order.setRepairStartDate(rS.getTimestamp(3));
+        order.setAssignedRepairmanId(rS.getInt(4));
+        order.setDefectDescription(rS.getString(5));
+        order.setRepairDescription(rS.getString(6));
+        order.setStatus(rS.getString(7));
+        order.setVehicalId(rS.getInt(8));
+        order.setRepairCost(rS.getInt(9));
+        order.setPartsCost(rS.getInt(10));
+        order.setWageHourly(rS.getInt(11));
+        order.setRepairHours(rS.getInt(12));
+    }
+
+    public static ArrayList<Order> readAllActive() {
+
+        ResultSet rS = null;
+        ArrayList<Order> orders = new ArrayList<Order>();
+
+        try(Connection connection = DbUtil.getConnection();
+            Statement statement = connection.createStatement()) {
+
+            rS = statement.executeQuery(READ_ALL_ACTIVE_QUERY);
+
+            while (rS.next()) {
+
+                Order order = new Order();
+                orderFieldsInput(rS, order);
+
+                orders.add(order);
+            }
+
+            return orders;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rS != null) {
+                    rS.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     public static ArrayList<Order> readAll(int id) {

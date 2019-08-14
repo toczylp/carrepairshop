@@ -7,6 +7,7 @@ import pl.coderslab.dao.OrderDao;
 import pl.coderslab.dao.VehicleDao;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -20,7 +21,7 @@ public class Main {
 
         OrderDao orderDao = new OrderDao();
 
-        Order order = orderDao.readById(1);
+/*        Order order = orderDao.readById(1);
 
         order.setRepairStartDate(nId);
         order.setRepairHours(20);
@@ -30,7 +31,14 @@ public class Main {
         order.setStatus("ready to pick up");
         order.setRepairDescription("wymiana tarcz i klockow hamulcowych");
 
-        orderDao.update(order);
+        orderDao.update(order);*/
+
+        ArrayList<Order> orders = orderDao.readAllActive();
+
+        for (Order order :
+             orders) {
+            System.out.println(order.getRepairDescription());
+        }
 
 
         /*

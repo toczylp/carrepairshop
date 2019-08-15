@@ -1,19 +1,19 @@
 package pl.coderslab.datamodel;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Client {
 
     private int id;
     private String name;
     private String surname;
-    private Timestamp dateOfBirth;
+    private Date dateOfBirth;
     private String mail;
 
     public Client() {
     }
 
-    public Client(String name, String surname, Timestamp dateOfBirth, String mail) {
+    public Client(String name, String surname, Date dateOfBirth, String mail) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
@@ -44,11 +44,11 @@ public class Client {
         this.surname = surname;
     }
 
-    public Timestamp getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Timestamp dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

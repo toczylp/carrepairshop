@@ -26,7 +26,7 @@ public class ClientDao {
 
             statement.setString(1, client.getName());
             statement.setString(2, client.getSurname());
-            statement.setTimestamp(3, client.getDateOfBirth());
+            statement.setDate(3, client.getDateOfBirth());
             statement.setString(4, client.getMail());
 
             statement.executeUpdate();
@@ -73,7 +73,7 @@ public class ClientDao {
                 client.setId(id);
                 client.setName(rS.getString(2));
                 client.setSurname(rS.getString(3));
-                client.setDateOfBirth(rS.getTimestamp(4));
+                client.setDateOfBirth(rS.getDate(4));
                 client.setMail(rS.getString(5));
             }
 
@@ -108,7 +108,7 @@ public class ClientDao {
                 client.setId(rS.getInt(1));
                 client.setName(rS.getString(2));
                 client.setSurname(rS.getString(3));
-                client.setDateOfBirth(rS.getTimestamp(4));
+                client.setDateOfBirth(rS.getDate(4));
                 client.setMail(rS.getString(5));
                 clients.add(client);
             }
@@ -137,7 +137,7 @@ public class ClientDao {
 
             statement.setString(1 ,client.getName());
             statement.setString(2, client.getSurname());
-            statement.setTimestamp(3, client.getDateOfBirth());
+            statement.setDate(3, client.getDateOfBirth());
             statement.setString(4, client.getMail());
             statement.setInt(5, client.getId());
 

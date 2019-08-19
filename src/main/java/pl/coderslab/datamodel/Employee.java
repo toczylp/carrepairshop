@@ -22,6 +22,16 @@ public class Employee {
         this.wageHourly = wageHourly;
     }
 
+    public Employee(int id, String name, String surname, String address, int phoneNo, String note, int wageHourly) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+        this.phoneNo = phoneNo;
+        this.note = note;
+        this.wageHourly = wageHourly;
+    }
+
     public int getId() {
         return id;
     }

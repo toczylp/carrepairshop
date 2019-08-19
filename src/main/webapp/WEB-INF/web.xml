@@ -4,4 +4,18 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>restricted methods</web-resource-name>
+      <url-pattern>/*</url-pattern>
+      <http-method>PUT</http-method>
+      <http-method>DELETE</http-method>
+      <http-method>OPTIONS</http-method>
+    </web-resource-collection>
+    <auth-constraint />
+  </security-constraint>
+
+  <security-role>
+    <role-name>tomcat</role-name>
+  </security-role>
 </web-app>

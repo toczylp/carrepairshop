@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <html>
 <head>
     <title>Car Repair Shop</title>
@@ -9,46 +10,48 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <!--<script src="app.js" type="text/javascript"></script>-->
 </head>
-
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+<div class="well well-lg">
+    <h4>Repair records of ${repair_info[0].nameRepairman}  ${repair_info[0].surnameRepairman} :</h4>
+</div>
 <div class="container">
     <table class="table table-striped">
         <thead>
         <tr>
             <th>Repair Id</th>
-            <th>Repair Start Date Planned</th>
             <th>Repair Start Date</th>
-            <th>Assigned Repairman Id</th>
             <th>Defect Description</th>
             <th>Repair Description</th>
-            <th>Status</th>
-            <th>Vehical Id</th>
-            <th>Repair Cost</th>
-            <th>Parts Cost</th>
-            <th>Wage Hourly</th>
+            <th>Repair Status</th>
+            <th>Car Brand</th>
+            <th>Car Model</th>
+            <th>Registration No</th>
             <th>Repair Hours</th>
+            <th>Repair Cost</th>
+            <th>Repairman name</th>
+            <th>Repairman Surname</th>
         </tr>
         </thead>
         <tbody>
 
-        <c:forEach items="${orders}" var="order" varStatus="status">
-            <c:if test="${order != null}">
+        <c:forEach items="${repair_info}" var="el" varStatus="status">
+            <c:if test="${repair_info != null}">
                 <tr>
-                    <td>${order.id}</td>
-                    <td>${order.repairStartDatePlanned}</td>
-                    <td>${order.repairStartDate}</td>
-                    <td>${order.assignedRepairmanId}</td>
-                    <td>${order.defectDescription}</td>
-                    <td>${order.repairDescription}</td>
-                    <td>${order.status}</td>
-                    <td>${order.vehicalId}</td>
-                    <td>${order.repairCost}</td>
-                    <td>${order.partsCost}</td>
-                    <td>${order.wageHourly}</td>
-                    <td>${order.repairHours}</td>
+                    <td>${el.id}</td>
+                    <td>${el.repairStartDate}</td>
+                    <td>${el.defectDescription}</td>
+                    <td>${el.repairDescription}</td>
+                    <td>${el.status}</td>
+                    <td>${el.model}</td>
+                    <td>${el.brand}</td>
+                    <td>${el.registrationNo}</td>
+                    <td>${el.repairHours}</td>
+                    <td>${el.repairCost}</td>
+                    <td>${el.nameRepairman}</td>
+                    <td>${el.surnameRepairman}</td>
+
                 </tr>
             </c:if>
         </c:forEach>

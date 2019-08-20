@@ -78,7 +78,7 @@
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="email" nameRepairman="email">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>

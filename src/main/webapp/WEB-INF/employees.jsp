@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <html>
 <head>
     <title>Car Repair Shop</title>
@@ -9,14 +10,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="/home/piotr/IdeaProjects/carrepairshop/src/main/webapp/WEB-INF/app.js"></script>-->
 
 <%--    <script type="text/javascript">
             $(document).ready(function() {
                 $('.btn-edit').parent().on('click', '.btn-edit', function () {
                     console.log("click");
                     //var sendData = $('#data').val();
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
                     $.ajax({
                         url: '/employees_edit_delete',    //Your api url
                         type: 'DELETE',   //type is any HTTP method
@@ -31,10 +32,8 @@
             });
     </script>--%>
 </head>
-
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-
 <c:if test="${message == \"success\"}">
     <div class="modal" role="dialog" id="message_modal">
         <div class="modal-dialog" role="document">
@@ -58,6 +57,7 @@
         $("#message_modal").modal('show');
     </script>
 </c:if>
+
 <c:if test="${message == \"invalid_inputs\"}">
     <div class="modal" role="dialog" id="message_modal">
         <div class="modal-dialog" role="document">
@@ -125,6 +125,7 @@
             <th>Employee Description</th>
             <th>Employee Wage</th>
             <th>Edit</th>
+            <th>Repair Info</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -144,6 +145,12 @@
                         <form action="<c:url value="/employees_edit"/>" method="get">
                             <input type="number" name="id" hidden value="${employee.id}"/>
                             <button type="submit" class="btn btn-warning">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="<c:url value="/repair_by_repairman"/>" method="post">
+                            <input type="number" name="id" hidden value="${employee.id}"/>
+                            <button type="submit" class="btn btn-info">Repairs</button>
                         </form>
                     </td>
                     <td>

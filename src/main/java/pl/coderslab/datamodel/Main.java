@@ -4,7 +4,9 @@ package pl.coderslab.datamodel;
 
 import pl.coderslab.dao.EmployeeDao;
 import pl.coderslab.dao.OrderDao;
+import pl.coderslab.dao.RepairInfoByEmployeeDao;
 import pl.coderslab.dao.VehicleDao;
+import pl.coderslab.datamodel.reports.RepairInfoByEmployee;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -33,12 +35,16 @@ public class Main {
 
         orderDao.update(order);*/
 
-        ArrayList<Order> orders = orderDao.readAllActive();
+        RepairInfoByEmployeeDao repairInfoByEmployeeDao = new RepairInfoByEmployeeDao();
 
-        for (Order order :
-             orders) {
-            System.out.println(order.getRepairDescription());
+        ArrayList<RepairInfoByEmployee> list = repairInfoByEmployeeDao.readById(1);
+
+        for (RepairInfoByEmployee r : list) {
+            System.out.println(r.getId());
         }
+
+
+        ArrayList<Order> orders = orderDao.readAllActive();
 
 
         /*
@@ -70,8 +76,8 @@ public class Main {
              clients) {
 
             System.out.println(client.getId());
-            System.out.println(client.getName());
-            System.out.println(client.getSurname());
+            System.out.println(client.getNameRepairman());
+            System.out.println(client.getSurnameRepairman());
             System.out.println(client.getDateOfBirth());
             System.out.println(client.getMail());
             System.out.println("*********************************");

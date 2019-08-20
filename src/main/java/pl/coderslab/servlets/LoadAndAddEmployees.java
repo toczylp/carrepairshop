@@ -38,12 +38,8 @@ public class LoadAndAddEmployees extends HttpServlet {
             employeeDao.create(employee);
             if (employee.getId() != 0) {
                 request.setAttribute("message", "success");
-                ArrayList<Employee> employees = EmployeeDao.readAll();
-                request.setAttribute("employees", employees);
                 doGet(request, response);
             } else {
-                ArrayList<Employee> employees = EmployeeDao.readAll();
-                request.setAttribute("employees", employees);
                 getServletContext().getRequestDispatcher("/WEB-INF/error/data_base_access_error.html").forward(request, response);
             }
         } else {
@@ -58,12 +54,5 @@ public class LoadAndAddEmployees extends HttpServlet {
         ArrayList<Employee> employees = EmployeeDao.readAll();
         request.setAttribute("employees", employees);
         getServletContext().getRequestDispatcher("/WEB-INF/employees.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        System.out.println("Hurra! Wymusiłem metodę put!");
-        getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 }

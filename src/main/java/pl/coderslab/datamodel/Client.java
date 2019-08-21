@@ -20,6 +20,14 @@ public class Client {
         this.mail = mail;
     }
 
+    public Client(int id, String name, String surname, Date dateOfBirth, String mail) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.dateOfBirth = dateOfBirth;
+        this.mail = mail;
+    }
+
     public int getId() {
         return id;
     }

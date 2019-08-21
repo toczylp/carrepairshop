@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
-@WebServlet(name = "DeleteEmployees", urlPatterns = "/employees_edit")
-public class EditEmployees extends HttpServlet {
+@WebServlet(name = "EmployeesEdit", urlPatterns = "/employees_edit")
+public class EmployeesEdit extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
@@ -35,9 +36,11 @@ public class EditEmployees extends HttpServlet {
         EmployeeDao employeeDao = new EmployeeDao();
         boolean updateFlag = employeeDao.update(employee);
         if (updateFlag) {
-            getServletContext().getRequestDispatcher("/employees").forward(request, response);
+            ArrayList<Employee> employees = EmployeeDao.readAll();
+            request.setAttribute("employees", employees);
+            getServletContext().getRequestDispatcher("/WEB-INF/employees.jsp").forward(request, response);
         } else {
-            response.sendRedirect("/WEB-INF/error/data_base_access_error.html");
+            getServletContext().getRequestDispatcher("/WEB-INF/error/data_base_access_error.html").forward(request, response);
         }
     }
 
@@ -51,11 +54,11 @@ public class EditEmployees extends HttpServlet {
         if (!(id == null)) {
             idAsInt = Integer.parseInt(id);
         } else {
-            response.sendRedirect("/WEB-INF/error/data_base_access_error.html");
+            getServletContext().getRequestDispatcher("/WEB-INF/error/data_base_access_error.html").forward(request, response);
         }
         EmployeeDao employeeDao = new EmployeeDao();
         Employee employee = employeeDao.readById(idAsInt);
-        System.out.println(employee.getWageHourly());
+        //System.out.println(employee.getWageHourly());
 
         request.setAttribute("employee", employee);
         getServletContext().getRequestDispatcher("/WEB-INF/employee_edit.jsp").forward(request, response);

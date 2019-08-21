@@ -11,15 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-@WebServlet(name = "AddClient", urlPatterns ="/add_client")
-public class AddClient extends HttpServlet {
+@WebServlet(name = "ClientAdd", urlPatterns ="/add_client")
+public class ClientAdd extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String dOb = request.getParameter("date_of_birth");
-        String email = request.getParameter("email");
+        String email = request.getParameter("mail");
         Date dObAsDate = null;
         if (!("".equals(dOb))) {
             dObAsDate = Date.valueOf(dOb);
@@ -46,10 +48,19 @@ public class AddClient extends HttpServlet {
         }
 
     }
-
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        getServletContext().getRequestDispatcher("/WEB-INF/add_client.jsp").forward(request, response);
+        ClientDao clientDao = new ClientDao();
+        ArrayList<Client> clients = clientDao.readAll();
 
+        if (!clients.isEmpty()) {
+
+            request.setAttribute("clients", clients);
+            getServletContext().getRequestDispatcher("/WEB-INF/add_client.jsp").forward(request, response);
+
+        } else {
+            response.sendRedirect("/WEB-INF/error/data_base_access_error.html");
+        }
     }
 }

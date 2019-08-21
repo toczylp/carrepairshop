@@ -83,6 +83,52 @@
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Client id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Date of Birth</th>
+            <th>Mail</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:if test="${clients != null}">
+        <c:forEach items="${clients}" var="el">
+            <tr>
+                <td>${el.id}</td>
+                <td>${el.name}</td>
+                <td>${el.surname}</td>
+                <td>${el.dateOfBirth}</td>
+                <td><a href="mailto:${el.mail}">${el.mail}</a></td>
+                <td>
+                    <form action="<c:url value="/client_edit"/>" method="get">
+                        <input type="number" name="id" hidden value="${el.id}"/>
+                        <button type="submit" class="btn btn-warning">Edit</button>
+                    </form>
+                </td>
+<%--                <td> w póżniejszym czasie można dodać ocpję przeglądania napraw albo smaochodów
+                    <form action="<c:url value="/repair_by_repairman"/>" method="post">
+                        <input type="number" name="id" hidden value="${employee.id}"/>
+                        <button type="submit" class="btn btn-info">Repairs</button>
+                    </form>
+                </td>--%>
+                <td>
+                    <form action="<c:url value="/remove_client"/>" method="get">
+                        <input type="number" name="id" hidden value="${el.id}"/>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+        </c:if>
+        </tbody>
+    </table>
+</div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

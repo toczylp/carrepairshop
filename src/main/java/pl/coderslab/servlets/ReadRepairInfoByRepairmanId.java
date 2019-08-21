@@ -1,6 +1,8 @@
 package pl.coderslab.servlets;
 
+import pl.coderslab.dao.EmployeeDao;
 import pl.coderslab.dao.RepairInfoByEmployeeDao;
+import pl.coderslab.datamodel.Employee;
 import pl.coderslab.datamodel.reports.RepairInfoByEmployee;
 
 import javax.servlet.ServletException;
@@ -23,18 +25,21 @@ public class ReadRepairInfoByRepairmanId extends HttpServlet {
         if (!("".equals(id))) {
             idAsInt = Integer.parseInt(id);
         } else {
-            response.sendRedirect("/WEB-INF/error/data_base_access_error.html");
+            getServletContext().getRequestDispatcher("/WEB-INF/error/data_base_access_error.html").forward(request, response);
         }
 
         RepairInfoByEmployeeDao repairInfoByEmployeeDao = new RepairInfoByEmployeeDao();
         ArrayList<RepairInfoByEmployee> repairInfo = repairInfoByEmployeeDao.readById(idAsInt);
 
-        if (repairInfo.size() != 0) {
+        if (!repairInfo.isEmpty()) {
             request.setAttribute("repair_info", repairInfo);
             getServletContext().getRequestDispatcher("/WEB-INF/repair_info_by_employee.jsp").forward(request, response);
-        }
-        if (repairInfo.size() == 0) {
-            response.sendRedirect("WEB-INF/error/data_base_access_error.html");
+        } else {
+            request.setAttribute("message", "no_repair");
+            EmployeeDao employeeDao = new EmployeeDao();
+            ArrayList<Employee> employees = EmployeeDao.readAll();
+            request.setAttribute("employees", employees);
+            getServletContext().getRequestDispatcher("/WEB-INF/employees.jsp").forward(request, response);
         }
     }
 

@@ -10,7 +10,7 @@
                 <li><a href="/add_client">Clients</a></li>
                 <li><a href="/employees">Employees</a></li>
                 <li><a href="/car_load">Vehicles</a></li>
-                <li><a>Page 4</a></li>
+                <li><a href="/repair_load">Repairs</a></li>
                 <li><a href="#">Page 5</a></li>
             </ul>
         </div>

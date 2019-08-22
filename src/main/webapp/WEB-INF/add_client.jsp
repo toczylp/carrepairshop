@@ -13,7 +13,7 @@
 
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<c:if test="${message == \"success\"}">
+<c:if test="${message != null}">
     <div class="modal" role="dialog" id="message_modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -24,7 +24,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Record has been added successfuly</p>
+                    <c:if test="${message = \"success\"}">
+                         <p>Record has been added successfuly</p>
+                    </c:if>
+                    <c:if test="${message = \"invalid_inputs\"}">
+                        <p>Invalid data has been found</p>
+                        <p>Please input correct data!</p>
+                    </c:if>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -34,30 +40,6 @@
     </div>
     <script type="text/javascript">
             $("#message_modal").modal('show');
-    </script>
-</c:if>
-<c:if test="${message == \"invalid_inputs\"}">
-    <div class="modal" role="dialog" id="message_modal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Feedback message</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Invalid data has been found</p>
-                    <p>Please input correct data!</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $("#message_modal").modal('show');
     </script>
 </c:if>
 

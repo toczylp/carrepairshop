@@ -45,7 +45,9 @@ public class Main {
 
 
         ArrayList<Order> orders = orderDao.readAllActive();
-
+VehicleDao vehicleDao = new VehicleDao();
+        Vehicle vehicle = vehicleDao.readById(1);
+        System.out.println(vehicle.getProductionYear());
 
         /*
         Vehicle vehicle = new Vehicle("700", "Fiat", 2001, "GA1111", nId, 1);

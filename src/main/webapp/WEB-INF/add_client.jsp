@@ -93,6 +93,7 @@
             <th>Date of Birth</th>
             <th>Mail</th>
             <th>Edit</th>
+            <th>Assign Car</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -111,12 +112,12 @@
                         <button type="submit" class="btn btn-warning">Edit</button>
                     </form>
                 </td>
-<%--                <td> w póżniejszym czasie można dodać ocpję przeglądania napraw albo smaochodów
-                    <form action="<c:url value="/repair_by_repairman"/>" method="post">
-                        <input type="number" name="id" hidden value="${employee.id}"/>
-                        <button type="submit" class="btn btn-info">Repairs</button>
+                <td>
+                    <form action="<c:url value="/car_assign"/>" method="get">
+                        <input type="number" name="id" hidden value="${el.id}"/>
+                        <button type="submit" class="btn btn-info">Assign Car</button>
                     </form>
-                </td>--%>
+                </td>
                 <td>
                     <form action="<c:url value="/remove_client"/>" method="get">
                         <input type="number" name="id" hidden value="${el.id}"/>

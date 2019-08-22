@@ -28,7 +28,7 @@ public class VehicleDao {
             statement.setString(2, vehicle.getBrand());
             statement.setInt(3, vehicle.getProductionYear());
             statement.setString(4, vehicle.getRegistrationNo());
-            statement.setTimestamp(5, vehicle.getNextInspectionDate());
+            statement.setDate(5, vehicle.getNextInspectionDate());
             statement.setInt(6, vehicle.getClientId());
             statement.executeUpdate();
 
@@ -69,12 +69,12 @@ public class VehicleDao {
             while (rS.next()) {
 
                 vehicle.setVehicalId(id);
-                vehicle.setModel(rS.getString(1));
-                vehicle.setBrand(rS.getString(2));
-                vehicle.setProductionYear(rS.getInt(3));
-                vehicle.setRegistrationNo(rS.getString(4));
-                vehicle.setNextInspectionDate(rS.getTimestamp(5));
-                vehicle.setClientId(rS.getInt(6));
+                vehicle.setModel(rS.getString(2));
+                vehicle.setBrand(rS.getString(3));
+                vehicle.setProductionYear(rS.getInt(4));
+                vehicle.setRegistrationNo(rS.getString(5));
+                vehicle.setNextInspectionDate(rS.getDate(6));
+                vehicle.setClientId(rS.getInt(7));
             }
             return vehicle;
         } catch (SQLException e) {
@@ -109,7 +109,7 @@ public class VehicleDao {
                 vehicle.setBrand(rS.getString(3));
                 vehicle.setProductionYear(rS.getInt(4));
                 vehicle.setRegistrationNo(rS.getString(5));
-                vehicle.setNextInspectionDate(rS.getTimestamp(6));
+                vehicle.setNextInspectionDate(rS.getDate(6));
                 vehicle.setClientId(rS.getInt(7));
 
                 vehicles.add(vehicle);
@@ -137,7 +137,7 @@ public class VehicleDao {
             statement.setString(2, vehicle.getBrand());
             statement.setInt(3, vehicle.getProductionYear());
             statement.setString(4, vehicle.getRegistrationNo());
-            statement.setTimestamp(5, vehicle.getNextInspectionDate());
+            statement.setDate(5, vehicle.getNextInspectionDate());
             statement.setInt(6, vehicle.getClientId());
             statement.setInt(7, vehicle.getVehicalId());
 

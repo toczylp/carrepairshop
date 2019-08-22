@@ -2,11 +2,9 @@ package pl.coderslab.datamodel;
 
 // Class for testing DAO
 
-import pl.coderslab.dao.EmployeeDao;
-import pl.coderslab.dao.OrderDao;
-import pl.coderslab.dao.RepairInfoByEmployeeDao;
-import pl.coderslab.dao.VehicleDao;
+import pl.coderslab.dao.*;
 import pl.coderslab.datamodel.reports.RepairInfoByEmployee;
+import pl.coderslab.datamodel.reports.ReportBasic;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ public class Main {
 
         orderDao.update(order);*/
 
-        RepairInfoByEmployeeDao repairInfoByEmployeeDao = new RepairInfoByEmployeeDao();
+/*        RepairInfoByEmployeeDao repairInfoByEmployeeDao = new RepairInfoByEmployeeDao();
 
         ArrayList<RepairInfoByEmployee> list = repairInfoByEmployeeDao.readById(1);
 
@@ -45,7 +43,16 @@ public class Main {
 
 
         ArrayList<Order> orders = orderDao.readAllActive();
+VehicleDao vehicleDao = new VehicleDao();
+        Vehicle vehicle = vehicleDao.readById(1);
+        System.out.println(vehicle.getProductionYear());*/
 
+        ReportBaiscDao  reportBaiscDao = new ReportBaiscDao();
+        ArrayList<ReportBasic> report = reportBaiscDao.readAll();
+
+        for (ReportBasic reportBasic : report) {
+            System.out.println(reportBasic.getId());
+        }
 
         /*
         Vehicle vehicle = new Vehicle("700", "Fiat", 2001, "GA1111", nId, 1);

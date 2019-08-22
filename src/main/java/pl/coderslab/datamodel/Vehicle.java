@@ -1,6 +1,6 @@
 package pl.coderslab.datamodel;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class Vehicle {
 
@@ -9,13 +9,13 @@ public class Vehicle {
     private String brand;
     private int productionYear;
     private String registrationNo;
-    private Timestamp nextInspectionDate;
+    private Date nextInspectionDate;
     private int clientId = 0;
 
     public Vehicle() {
     }
 
-    public Vehicle(String model, String brand, int productionYear, String registrationNo, Timestamp nextInspectionDate, int clientId) {
+    public Vehicle(String model, String brand, int productionYear, String registrationNo, Date nextInspectionDate, int clientId) {
         this.model = model;
         this.brand = brand;
         this.productionYear = productionYear;
@@ -24,12 +24,22 @@ public class Vehicle {
         this.clientId = clientId;
     }
 
-    public Vehicle(String model, String brand, int productionYear, String registrationNo, Timestamp nextInspectionDate) {
+    public Vehicle(String model, String brand, int productionYear, String registrationNo, Date nextInspectionDate) {
         this.model = model;
         this.brand = brand;
         this.productionYear = productionYear;
         this.registrationNo = registrationNo;
         this.nextInspectionDate = nextInspectionDate;
+    }
+
+    public Vehicle(int vehicalId, String model, String brand, int productionYear, String registrationNo, Date nextInspectionDate, int clientId) {
+        this.vehicalId = vehicalId;
+        this.model = model;
+        this.brand = brand;
+        this.productionYear = productionYear;
+        this.registrationNo = registrationNo;
+        this.nextInspectionDate = nextInspectionDate;
+        this.clientId = clientId;
     }
 
     public int getVehicalId() {
@@ -72,11 +82,11 @@ public class Vehicle {
         this.registrationNo = registrationNo;
     }
 
-    public Timestamp getNextInspectionDate() {
+    public Date getNextInspectionDate() {
         return nextInspectionDate;
     }
 
-    public void setNextInspectionDate(Timestamp nextInspectionDate) {
+    public void setNextInspectionDate(Date nextInspectionDate) {
         this.nextInspectionDate = nextInspectionDate;
     }
 
@@ -88,3 +98,5 @@ public class Vehicle {
         this.clientId = clientId;
     }
 }
+
+

@@ -59,18 +59,16 @@ public class ClientEdit extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String id = request.getParameter("id");
         int idAsInt = 0;
-
-        if (!(id == null)) {
+        if (id != null) {
             idAsInt = Integer.parseInt(id);
         } else {
             getServletContext().getRequestDispatcher("/WEB-INF/error/data_base_access_error.html").forward(request, response);
         }
         ClientDao clientDao = new ClientDao();
-        Client client = clientDao.readById(idAsInt);
-        //System.out.println(employee.getWageHourly());
-
+        Client client = clientDao.readById(idAsInt);;
         request.setAttribute("client", client);
         getServletContext().getRequestDispatcher("/WEB-INF/client_edit.jsp").forward(request, response);
     }

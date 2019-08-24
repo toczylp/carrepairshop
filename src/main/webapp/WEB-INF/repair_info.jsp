@@ -50,18 +50,14 @@
 </c:if>
 <div class="container">
     <p><br><br></p>
-    <form action="/repair_create" method="post">
-        <div class="form-group">
-            <label for="status">Repair Status:</label>
-            <input type="number" class="form-control" id="status" name="status">
-        </div>
+    <form action="/repair_create" method="get">
         <div class="form-group">
             <label for="repair_start_planned">Planned Repair Start Date:</label>
-            <input type="datetime-local" class="form-control" id="repair_start_planned" name="repair_start_planned">
+            <input type="date" class="form-control" id="repair_start_planned" name="repair_start_planned">
         </div>
         <div class="form-group">
-            <label for="vehical_id">Vehicle Id:</label>
-            <select class="form-control" id="vehical_id" name="vehical_id">
+            <label for="vehicle_id">Vehicle Id:</label>
+            <select class="form-control" id="vehicle_id" name="vehicle_id">
                 <c:forEach items="${vehicles}" var="el">
                     <option value="${el.vehicalId}">${el.brand} ${el.model} ${el.registrationNo}</option>
                 </c:forEach>
@@ -72,10 +68,6 @@
             <input type="text" class="form-control" id="defect_description" name="defect_description">
         </div>
         <div class="form-group">
-            <label for="repair_description">Repair Description:</label>
-            <input type="text" class="form-control" id="repair_description" name="repair_description">
-        </div>
-        <div class="form-group">
             <label for="repairman_id">Assigned Repairman:</label>
              <select class="form-control" id="repairman_id" name="repairman_id">
                  <c:forEach items="${employees}" var="el">
@@ -83,15 +75,9 @@
                  </c:forEach>
             </select>
         </div>
-        <div class="form-group">
-            <label for="repair_hours">Repair Hours:</label>
-            <input type="number" class="form-control" id="repair_hours" name="repair_hours">
-        </div>
-        <div class="form-group">
-            <label for="part_cost">Part Cost:</label>
-            <input type="number" class="form-control" id="part_cost" name="part_cost">
-        </div>
+        <div>
         <button type="submit" class="btn btn-default">Create Work Order</button>
+        </div>
     </form>
 </div>
 <div class="well well-lg">

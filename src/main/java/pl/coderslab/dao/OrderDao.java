@@ -21,7 +21,7 @@ public class OrderDao {
     private static final String READ_ALL_QUERY = "select * from repair_order;";
     private static final String READ_ALL_ACTIVE_QUERY = "select * from repair_order where repair_status = 'in repair';";
     private static final String UPDATE_QUERY = "update repair_order set repair_start_date = ?, repair_description = ?, repair_cost = ?, repair_parts_cost = ?," +
-            " repair_wage_hourly_cost = ?, repair_hours =? where id = ?;";
+            " repair_wage_hourly_cost = ?, repair_hours =?, repair_status = ?  where id = ?;";
     private static final String UPDATE_QUERY_ORDER_STATUS = "update repair_order set repair_status = ? where id = ?;";
     private static final String DELETE_QUERY = "delete from repair_order where id = ?;";
 
@@ -253,7 +253,8 @@ public class OrderDao {
             statement.setInt(4, order.getPartsCost());
             statement.setInt(5, order.getWageHourly());
             statement.setInt(6, order.getRepairHours());
-            statement.setInt(7, order.getId());
+            statement.setString(7, order.getStatus());
+            statement.setInt(8, order.getId());
             int answer = statement.executeUpdate();
 
             if (answer == 1) {

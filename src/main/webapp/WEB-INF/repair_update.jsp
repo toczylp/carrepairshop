@@ -25,7 +25,13 @@
         </div>
         <div class="form-group">
             <label for="status">Status:</label>
-            <input type="text" class="form-control" id="status" name="status" value="${order.status}">
+            <select class="form-control" id="status" name="status">
+                <option value="${order.status}">Current Status : ${order.status}</option>
+                <option value="in repair">In Repair</option>
+                <option value="repair cost approved">Cost approved</option>
+                <option value="ready to pick up">Ready to Pick Up</option>
+                <option value="repair cancel">Repair Cancel</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="repair_start_date_planned">Pepair Start Date Planned:</label>

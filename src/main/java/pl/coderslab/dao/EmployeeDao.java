@@ -14,7 +14,7 @@ public class EmployeeDao {
     private static final String READ_ALL_QUERY = "select * from employees;";
     private static final String UPDATE_QUERY = "update employees set name = ?, surname = ?, address = ?, phone_number = ?, note = ?, wage_hourly = ? where id = ?;";
     private static final String DELETE_QUERY = "delete from employees where id = ?;";
-
+    private static final String GET_WAGE_QUERY = "select wage_hourly from employees where id = ?;";
     //CREATE
 
     public static Employee create(Employee employee) {
@@ -88,6 +88,39 @@ public class EmployeeDao {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        } finally {
+            try {
+                if (rS != null) {
+                    rS.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static int readWageById(int id) {
+
+        ResultSet rS = null;
+
+        try (Connection connection = DbUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_WAGE_QUERY)) {
+
+            statement.setInt(1, id);
+            rS = statement.executeQuery();
+            int wage = 0;
+
+            while (rS.next()) {
+                wage = rS.getInt(1);
+            }
+            return wage;
+
+            //return rS.getInt(1);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("błąd");
+            return 0;
         } finally {
             try {
                 if (rS != null) {

@@ -70,7 +70,6 @@
         </div>
         <button type="submit" class="btn btn-default">Save Changes</button>
     </form>
-</
 </div>
 <div>
 <jsp:include page="footer.jsp"></jsp:include>

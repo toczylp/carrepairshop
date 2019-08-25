@@ -50,12 +50,14 @@ public class RepairCreate extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/error/data_base_access_error.html").forward(request, response);
         }
 
-        Order order = new Order(dateAsTimestamp, repIdAsInt, defectDescription, vehicleIdAsInt);
+        EmployeeDao employeeDao = new EmployeeDao();
+        int wage = employeeDao.readWageById(repIdAsInt);
+
+        Order order = new Order(dateAsTimestamp, repIdAsInt, defectDescription, vehicleIdAsInt, wage);
         OrderDao orderDao = new OrderDao();
         orderDao.carInbound(order);
         ReportBaiscDao reportBaiscDao = new ReportBaiscDao();
         ArrayList<ReportBasic> repairs = reportBaiscDao.readAll();
-        EmployeeDao employeeDao = new EmployeeDao();
         ArrayList<Employee> employees = employeeDao.readAll();
         VehicleDao vehicleDao = new VehicleDao();
         ArrayList<Vehicle> vehicles = vehicleDao.readAll();

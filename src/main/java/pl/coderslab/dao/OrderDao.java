@@ -10,8 +10,8 @@ public class OrderDao {
 
     private static final String CREATE_QUERY_CAR_INBOUND = "insert into repair_order " +
             "(repair_start_date_planned, assigned_repairman, defect_description, repair_status, " +
-            "repair_vehical) " +
-            "VALUES (?, ?, ?, ?, ?);";
+            "repair_vehical, repair_wage_hourly_cost) " +
+            "VALUES (?, ?, ?, ?, ?, ?);";
 
     private static final String CREATE_QUERY = "insert into repair_order " +
             "(repair_start_date_planned, repair_start_date, assigned_repairman, defect_description, repair_description, repair_status, " +
@@ -104,6 +104,7 @@ public class OrderDao {
         statement.setString(3, order.getDefectDescription());
         statement.setString(4, order.getStatus());
         statement.setInt(5, order.getVehicalId());
+        statement.setInt(6, order.getWageHourly());
     }
 
     //READ
@@ -148,10 +149,10 @@ public class OrderDao {
         order.setRepairDescription(rS.getString(6));
         order.setStatus(rS.getString(7));
         order.setVehicalId(rS.getInt(8));
-        order.setRepairCost(rS.getInt(9));
         order.setPartsCost(rS.getInt(10));
         order.setWageHourly(rS.getInt(11));
         order.setRepairHours(rS.getInt(12));
+        order.setRepairCost();
     }
 
     private static void orderFieldsInput(ResultSet rS, Order order) throws SQLException {
@@ -163,10 +164,10 @@ public class OrderDao {
         order.setRepairDescription(rS.getString(6));
         order.setStatus(rS.getString(7));
         order.setVehicalId(rS.getInt(8));
-        order.setRepairCost(rS.getInt(9));
         order.setPartsCost(rS.getInt(10));
         order.setWageHourly(rS.getInt(11));
         order.setRepairHours(rS.getInt(12));
+        order.setRepairCost();
     }
 
     public static ArrayList<Order> readAllActive() {

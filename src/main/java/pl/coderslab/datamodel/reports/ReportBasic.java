@@ -39,7 +39,7 @@ public class ReportBasic {
         this.nextInspection = nextInspection;
         this.defectDescription = defectDescription;
         this.repairDescription = repairDescription;
-        this.repairCost = repairCost;
+        this.repairCost = repairHours * wageHourly + partsCost;
         this.repairHours = repairHours;
         this.partsCost = partsCost;
         this.nameRepairman = nameRepairman;

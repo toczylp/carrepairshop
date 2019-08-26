@@ -125,7 +125,7 @@ public class Order {
     }
 
     public void setRepairCost(int partsCost, int repairHours, int wageHourly) {
-        this.repairCost = partsCost + repairHours * wageHourly;
+        this.repairCost = 2 * partsCost + 2 * repairHours * wageHourly;
     }
 
     public int getPartsCost() {

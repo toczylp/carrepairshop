@@ -11,7 +11,7 @@
                 <li><a href="/employees">Employees</a></li>
                 <li><a href="/car_load">Vehicles</a></li>
                 <li><a href="/repair_load">Repairs</a></li>
-                <li><a href="#">Reports</a></li>
+                <li><a href="/reports">Reports</a></li>
             </ul>
         </div>
     </nav>

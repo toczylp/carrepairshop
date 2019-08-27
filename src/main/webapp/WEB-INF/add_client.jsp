@@ -24,10 +24,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <c:if test="${message = \"success\"}">
+                    <c:if test="${message == \"success\"}">
                          <p>Record has been added successfuly</p>
                     </c:if>
-                    <c:if test="${message = \"invalid_inputs\"}">
+                    <c:if test="${message == \"invalid_inputs\"}">
                         <p>Invalid data has been found</p>
                         <p>Please input correct data!</p>
                     </c:if>

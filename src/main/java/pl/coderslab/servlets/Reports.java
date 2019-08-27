@@ -1,6 +1,8 @@
 package pl.coderslab.servlets;
 
+import pl.coderslab.dao.ReportPLDao;
 import pl.coderslab.dao.ReportSalaryDao;
+import pl.coderslab.datamodel.reports.ReportProfitLoss;
 import pl.coderslab.datamodel.reports.ReportSalary;
 
 import javax.servlet.ServletException;
@@ -36,22 +38,28 @@ public class Reports extends HttpServlet {
         }
         if (dateStartAsTimestamp.after(dateEndAsTimestamp)) {
             request.setAttribute("message", "invalid_inputs");
-            doGet(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/report.jsp").forward(request, response);
         }
 
+        request.setAttribute("start", dateStart);
+        request.setAttribute("end", dateEnd);
+
         switch (reportType) {
-            case "sallary_report" :
+            case "salary_report" :
 
                 ReportSalaryDao reportSalaryDao = new ReportSalaryDao();
-
-                ArrayList<ReportSalary> report = reportSalaryDao.readAll(dateStartAsTimestamp, dateEndAsTimestamp);
-                request.setAttribute("report", report);
+                ArrayList<ReportSalary> salary_report = reportSalaryDao.readAll(dateStartAsTimestamp, dateEndAsTimestamp);
+                request.setAttribute("report", salary_report);
                 getServletContext().getRequestDispatcher("/WEB-INF/report.jsp").forward(request, response);
 
                 break;
 
             case "profit_loss_report" :
 
+                ReportPLDao reportPLDao = new ReportPLDao();
+                ReportProfitLoss profitLoss = reportPLDao.readAll(dateStartAsTimestamp, dateEndAsTimestamp);
+                request.setAttribute("reportPL", profitLoss);
+                getServletContext().getRequestDispatcher("/WEB-INF/report.jsp").forward(request, response);
                 break;
 
                 default:

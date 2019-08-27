@@ -24,12 +24,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <c:if test="${message = \"success\"}">
+                    <c:if test="${message == \"success\"}">
                         <p>Record has been added successfuly</p>
                     </c:if>
-                    <c:if test="${message = \"invalid_inputs\"}">
-                        <p>Invalid data has been found</p>
-                        <p>Please input correct data!</p>
+                    <c:if test="${message == \"invalid_inputs\"}">
+                        <h3>Invalid data has been found</h3>
+                        <h5>Please input correct data!</h5>
                     </c:if>
                 </div>
                 <div class="modal-footer">
@@ -49,7 +49,7 @@
         <div class="form-group">
             <label for="report_type">Select Report type:</label>
             <select class="form-control" id="report_type" name="report_type">
-                <option value="sallary_report"><p>Sallary Report</p></option>
+                <option value="salary_report" defult><p>Salary Report</p></option>
                 <option value="profit_loss_report">Profit and Loss Report</option>
             </select>
         </div>
@@ -67,6 +67,14 @@
         </div>
     </form>
 </div>
+<c:if test="${report != null}">
+    <div class="container">
+    <div class="well well-lg">
+        <h4>Salary Report</h4>
+        <p>Start date: ${start}</p>
+        <p>End date: ${end}</p>
+    </div>
+    </div>
 <div class="container">
     <table class="table table-striped">
         <thead>
@@ -89,6 +97,36 @@
         </tbody>
     </table>
 </div>
+</c:if>
+<c:if test="${reportPL != null}">
+    <div class="container">
+    <div class="well well-lg">
+        <h4>P&L Report</h4>
+        <p>Start date: ${start}</p>
+        <p>End date: ${end}</p>
+    </div>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Gross Income</th>
+                <th>Parts Cost Gross</th>
+                <th>Wages Gross</th>
+                <th>Net Income</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>${reportPL.incomeGross}</td>
+                <td>${reportPL.partsCostNet}</td>
+                <td>${reportPL.wagesNet}</td>
+                <td>${reportPL.incomeNet}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</c:if>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

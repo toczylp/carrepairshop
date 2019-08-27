@@ -25,11 +25,11 @@
                 </div>
                 <div class="modal-body">
                     <c:if test="${message == \"success\"}">
-                         <p>Record has been added successfuly</p>
+                        <p>Record has been added successfuly</p>
                     </c:if>
                     <c:if test="${message == \"invalid_inputs\"}">
-                        <p>Invalid data has been found</p>
-                        <p>Please input correct data!</p>
+                        <h3>Invalid data has been found</h3>
+                        <h5>Please input correct data!</h5>
                     </c:if>
                 </div>
                 <div class="modal-footer">
@@ -39,79 +39,94 @@
         </div>
     </div>
     <script type="text/javascript">
-            $("#message_modal").modal('show');
+        $("#message_modal").modal('show');
     </script>
 </c:if>
 
 <div class="container">
     <p><br><br></p>
-    <form action="/add_client" method="post">
+    <form action="/reports" method="post">
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <label for="report_type">Select Report type:</label>
+            <select class="form-control" id="report_type" name="report_type">
+                <option value="salary_report" defult><p>Salary Report</p></option>
+                <option value="profit_loss_report">Profit and Loss Report</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="start_date">Start Date</label>
+            <input type="date" class="form-control" id="start_date" name="start_date">
         </div>
         <div class="form-group">
-            <label for="surname">Surname:</label>
-            <input type="text" class="form-control" id="surname" name="surname">
+        <label for="end_date">End Date:</label>
+        <input type="date" class="form-control" id="end_date" name="end_date">
         </div>
-        <div class="form-group">
-            <label for="date_of_birth">Date Of Birth:</label>
-            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth">
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" nameRepairman="email">
-        </div>
+        <div>
         <button type="submit" class="btn btn-default">Submit</button>
+        </div>
     </form>
 </div>
+<c:if test="${report != null}">
+    <div class="container">
+    <div class="well well-lg">
+        <h4>Salary Report</h4>
+        <p>Start date: ${start}</p>
+        <p>End date: ${end}</p>
+    </div>
+    </div>
 <div class="container">
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Client id</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Date of Birth</th>
-            <th>Mail</th>
-            <th>Edit</th>
-            <th>Assign Car</th>
-            <th>Delete</th>
+            <th>Employee Name</th>
+            <th>Employee Surname</th>
+            <th>Salary</th>
         </tr>
         </thead>
         <tbody>
-        <c:if test="${clients != null}">
-        <c:forEach items="${clients}" var="el">
+        <c:if test="${report != null}">
+        <c:forEach items="${report}" var="el">
             <tr>
-                <td>${el.id}</td>
                 <td>${el.name}</td>
                 <td>${el.surname}</td>
-                <td>${el.dateOfBirth}</td>
-                <td><a href="mailto:${el.mail}">${el.mail}</a></td>
-                <td>
-                    <form action="<c:url value="/client_edit"/>" method="get">
-                        <input type="number" name="id" hidden value="${el.id}"/>
-                        <button type="submit" class="btn btn-warning">Edit</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="<c:url value="/car_assign"/>" method="get">
-                        <input type="number" name="id" hidden value="${el.id}"/>
-                        <button type="submit" class="btn btn-info">Assign Car</button>
-                    </form>
-                </td>
-                <td>
-                    <form action="<c:url value="/remove_client"/>" method="get">
-                        <input type="number" name="id" hidden value="${el.id}"/>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
+                <td>${el.salary}</td>
             </tr>
         </c:forEach>
         </c:if>
         </tbody>
     </table>
 </div>
+</c:if>
+<c:if test="${reportPL != null}">
+    <div class="container">
+    <div class="well well-lg">
+        <h4>P&L Report</h4>
+        <p>Start date: ${start}</p>
+        <p>End date: ${end}</p>
+    </div>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Gross Income</th>
+                <th>Parts Cost Gross</th>
+                <th>Wages Gross</th>
+                <th>Net Income</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>${reportPL.incomeGross}</td>
+                <td>${reportPL.partsCostNet}</td>
+                <td>${reportPL.wagesNet}</td>
+                <td>${reportPL.incomeNet}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</c:if>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

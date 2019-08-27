@@ -28,16 +28,17 @@ public class Order {
         this.vehicalId = vehicalId;
     }
 
-    public Order(Timestamp repairStartDatePlanned, int assignedRepairmanId, String defectDescription, int vehicalId) {
+    public Order(Timestamp repairStartDatePlanned, int assignedRepairmanId, String defectDescription, int vehicalId, int wage) {
         this.repairStartDatePlanned = repairStartDatePlanned;
         this.assignedRepairmanId = assignedRepairmanId;
         this.defectDescription = defectDescription;
         this.vehicalId = vehicalId;
+        this.wageHourly = wage;
     }
 
     public Order(
             Timestamp repairStartDatePlanned, Timestamp repairStartDate, int assignedRepairmanId, String defectDescription,
-            String repairDescription, String status, int vehicalId, int repairCost, int partsCost, int wageHourly, int repairHours) {
+            String repairDescription, String status, int vehicalId, int partsCost, int wageHourly, int repairHours) {
         this.repairStartDatePlanned = repairStartDatePlanned;
         this.repairStartDate = repairStartDate;
         this.assignedRepairmanId = assignedRepairmanId;
@@ -45,7 +46,7 @@ public class Order {
         this.repairDescription = repairDescription;
         this.status = status;
         this.vehicalId = vehicalId;
-        this.repairCost = repairCost;
+        this.repairCost = partsCost + repairHours * wageHourly;
         this.partsCost = partsCost;
         this.wageHourly = wageHourly;
         this.repairHours = repairHours;
@@ -123,8 +124,8 @@ public class Order {
         this.repairCost = this.wageHourly * this.repairHours + this.partsCost;
     }
 
-    public void setRepairCost(int repairCost) {
-        this.repairCost = repairCost;
+    public void setRepairCost(int partsCost, int repairHours, int wageHourly) {
+        this.repairCost = 2 * partsCost + 2 * repairHours * wageHourly;
     }
 
     public int getPartsCost() {

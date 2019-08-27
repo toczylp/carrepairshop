@@ -47,12 +47,16 @@ VehicleDao vehicleDao = new VehicleDao();
         Vehicle vehicle = vehicleDao.readById(1);
         System.out.println(vehicle.getProductionYear());*/
 
-        ReportBaiscDao  reportBaiscDao = new ReportBaiscDao();
+/*        ReportBaiscDao  reportBaiscDao = new ReportBaiscDao();
         ArrayList<ReportBasic> report = reportBaiscDao.readAll();
 
         for (ReportBasic reportBasic : report) {
             System.out.println(reportBasic.getId());
-        }
+        }*/
+
+        EmployeeDao employeeDao = new EmployeeDao();
+
+        System.out.println(employeeDao.readWageById(6));
 
         /*
         Vehicle vehicle = new Vehicle("700", "Fiat", 2001, "GA1111", nId, 1);
